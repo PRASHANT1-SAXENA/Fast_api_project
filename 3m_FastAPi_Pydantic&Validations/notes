@@ -1,0 +1,71 @@
+* This will still be focused on creating Book API Endpoints
+    countinue includes get, post,put , delete Request methods
+
+* New information will include 
+    Data Validation , Expeciton Handling, Status Code, Swagger condfiguration, Python Request Objects
+
+
+# Difference between pydantic v1 and pydantic v2
+
+> FastAPI is now compatible with both Pydantic v1 and Pydantic v2.
+> Based on how new the version of FastAPI you are using, there could be small method name changes.
+
+# The three biggest are:
+>.dict() function is now renamed to .model_dump()
+>schema_extra function within a Config class is now renamed to json_schema_extra
+>Optional variables need a =None example: id: Optional[int] = None
+
+
+
+# what is Pydantic ?
+> Pydantic is Python library that is used for data modeling, data parsing and has efficient error Handling
+> Pydantic is commonly used as a resouce for data validation and how to handle data comming to our FastAPI application
+
+
+# What is status code?
+
+> An HTTP status code is used to help the client (the user or system submitting data to the server) understand what happened on the server-side application.
+
+> Status codes are international standards for how a client/server should handle the result of a request.
+
+> It allows everyone who sends a request to know if their submission was successful or not.
+
+# status codes
+> 1xx  Informational Response: Request processing
+> 2xx  Successful Request: Successfully completed
+> 3xx  Redirection: Further action must be completed
+> 4xx  Client Error: An error was caused by the client
+> 5xx  Server Error: An error occurred on the server
+
++------+------------------------+----------------------------------------------+
+| Code | Status                 | Description                                  |
++------+------------------------+----------------------------------------------+
+| 100  | Continue               | Request received, continue processing.       |
+| 101  | Switching Protocols    | Protocol is being switched.                  |
+| 102  | Processing             | Request is being processed.                  |
+|------------------------------------------------------------------------------|
+| 200  | OK                     | Request successful.                          |
+| 201  | Created                | Resource successfully created.               |
+| 202  | Accepted               | Request accepted for processing.             |
+| 204  | No Content             | Success, no content returned.                |
+|------------------------------------------------------------------------------|
+| 300  | Multiple Choices       | Multiple response options available.         |
+| 301  | Moved Permanently      | Resource permanently moved.                  |
+| 302  | Found                  | Resource temporarily moved.                  |
+| 304  | Not Modified           | Resource unchanged.                          |
+|------------------------------------------------------------------------------|
+| 400  | Bad Request            | Invalid client request.                      |
+| 401  | Unauthorized           | Authentication required.                     |
+| 403  | Forbidden              | Access denied.                               |
+| 404  | Not Found              | Resource not found.                          |
+| 405  | Method Not Allowed     | HTTP method not allowed.                     |
+| 408  | Request Timeout        | Request timed out.                           |
+| 409  | Conflict               | Resource conflict occurred.                  |
+| 422  | Unprocessable Entity   | Semantic validation failed.                  |
+|------------------------------------------------------------------------------|
+| 500  | Internal Server Error  | Server encountered an error.                 |
+| 501  | Not Implemented        | Functionality not supported.                 |
+| 502  | Bad Gateway            | Invalid upstream response.                   |
+| 503  | Service Unavailable    | Server temporarily unavailable.              |
+| 504  | Gateway Timeout        | Upstream server timeout.                     |
++------+------------------------+----------------------------------------------+

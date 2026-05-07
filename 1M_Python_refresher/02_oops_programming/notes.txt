@@ -1,0 +1,120 @@
+""" oop is object orinted programming is a programming paradigm based on the concept
+of objects, which can condain data and code . it has two thing bheviour and state 
+like dog is a object bheviour is eat, bark etc and state is 4 legs , golder hair etc so 
+bheviour is what object does and state is what object have """
+
+
+# premitive data type
+
+legs: int =4
+ears: int = 2
+type: str = 'Goldendoodle'
+age: int =5
+color: str= "yellow"
+
+Q. so making class i need to make different file or same file can differnet class
+ans. 
+Best practice:
+Small project → same file
+Large project → separate files by responsibility
+
+
+
+So for creating class 
+
+make Dog_f.py file in that 
+
+class Dog:
+    legs: int =4
+    ears: int = 2
+    type: str = 'Goldendoodle'
+    age: int =5
+    color: str= "yellow"
+
+
+from Dog_f import *
+
+dog=Dog()
+print(dog.color) output will be yellow
+
+
+constructor:- A constructor is a special method in a class that automatically executes when an object is created, mainly used to initialize object attributes.
+In Python, the constructor is defined using __init__().
+
+1. Default / Empty Constructor
+
+class Demo:
+    def __init__(self):
+        pass
+
+    def talk(self):
+        print('i am an Enemy)
+
+obj = Demo()
+
+note:- Now python automatically created if no constructor is found when you only initialize with ememy = Enemy()
+
+2. No-Argument Constructor
+
+class Demo:
+    def __init__(self):
+        print("Enemy is created with no starting value)
+
+    def talk(self):
+        print('i am an Enemy)
+
+obj = Demo()
+
+
+
+3. Parameterized Constructor
+
+
+
+
+
+
+Now there is four main pillar
+
+1. Encapsulation;- Encapsulation in OOP is the concept of bundling data and the 
+methods that operate on that data into a single unit (class) while restricting direct 
+access to internal details.It protects data from unintended modification by controlling 
+access through defined methods or interfaces.
+# In short Encapsultion makes our public attribute to private means no one can change one object is intialized by
+ using double underscore before varible name
+
+
+2. Abstraction :- Abstraction in OOP is the concept of showing only essential features
+ or outcomes to the user while hiding the internal implementation details.
+It allows users to interact with an object through simple interfaces without needing 
+to understand how it works internally.
+
+# in short: it is used to hide funcitonality (means whole funciton) only process you can see as outpur
+
+
+3. Inhertence;- Inheritance in OOP is the concept where one class acquires the properties
+and behaviors of another class, allowing code reuse and hierarchical relationships.
+It enables a child class to use or extend the features of a parent class.
+
+# what is overriding in Inheritance
+Method overriding is when a child class provides its own implementation of a method already defined in the parent class.
+It allows the child class to modify or extend parent behavior.
+
+# self vs super in Inheritance
+
+self → self is used to refer to the current object's instance variables.When parameter names 
+        and instance variable names are the same, self differentiates them by assigning values to 
+        the object's attributes.
+
+super() → super() is used to access the parent class’s methods or constructor from the child class.
+            It helps reuse parent functionality without directly naming the parent class.
+
+
+
+
+
+4. Polymorphism:- Polymorphism in OOP is the concept of using a single interface or method
+ name to perform different behaviors depending on the object or class.
+It allows the same operation to work differently for different data types or classes.
+
+# In short Polymorphsim means to have many forms

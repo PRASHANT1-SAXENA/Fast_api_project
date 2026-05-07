@@ -1,0 +1,72 @@
+FastAPI is a python web-framework for buidling mordern Restful APIs
+
+
+# after making virtual envionment
+# pip install fastapi
+# pip install "uvicorn"
+
+# what is request and response
+web page is request with a fastapi server than fastapi server send response back to web page
+
+            request by using Http request method
+web page --------------> fastapi server
+web page <-------------- fastapi server
+            response
+
+
+http request method
+crud          http request method
+Read          get
+create        Post
+update        put
+delete        delete
+
+# how to run api :- 
+one way:- uvicorn books:app --reload
+other way if FastApi is update then only:- fastapi run books.py
+
+when create app like this app = FastAPI(docs_url=None) so that docs_url
+ is not acceable or override by making of its own or disable docs in production
+
+what is use of asyn ?  but here it is opiton as python automatically handle this.
+ async is used to create asynchronous functions that can handle multiple tasks efficiently without blocking execution.
+
+Main use:
+Improves performance for:
+API requests
+Database calls
+File operations
+External services
+
+
+
+ what is Path Parameter ?
+ Path Parameter are request Parameter that have been attached to the url .it is usally defined 
+ as a way to find attached based on location 
+
+
+what is query Paramenter ?
+
+Query Paramenters are request Parameters theat have been attached after a "?"
+Query paramenters have name =value pairs
+example:- 127.0.0.1.:8000/books/?category=math
+
+
+
+what is Post Request method ?
+
+used to create Data
+Post can have a body that has additional information that Get Does not hove
+example :- {"title": "Title Seven","author":"Author two", "category":"math"}
+to push that data to backend application 
+
+# for post request we need to import body as well from fastapi while Get can not have a body
+
+ 
+What is PUt Request method ?
+
+Used to update data
+put can have a body that has additional information(like Post) that Get does not have
+example :{"title": "Title Seven","author":"Author two", "category":"Science"}
+
+
