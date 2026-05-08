@@ -2,6 +2,7 @@ from fastapi import FastAPI, Body, Path, Query    # Body is class use to make a 
 from fastapi import HTTPException
 from pydantic import BaseModel,Field
 from typing import Optional
+from starlette import status        # explicitly providing code as every time api success it give 200 but in post it should be 201 which is for created
 
 app = FastAPI()
 
@@ -70,16 +71,16 @@ BOOKS = [
 
 
 
-@app.get("/")
+@app.get("/",status_code=status.HTTP_200_OK())
 async def first_api():            # async is option for fastapi python now directly handle this
     return {"message": "welcome to api building"}
 
-@app.get("/api-endpoint")
+@app.get("/api-endpoint",status_code=status.HTTP_200_OK())
 async def second_api():            # async is option for fastapi python now directly handle this
     return {"message": "My name is prashant saxena"}
 
 
-@app.get("/books")
+@app.get("/books",status_code=status.HTTP_200_OK())
 async def read_all_books():            # async is option for fastapi python now directly handle this
     return BOOKS
 
@@ -93,7 +94,7 @@ async def read_all_books():            # async is option for fastapi python now 
 
 
 
-@app.post("/create-book")
+@app.post("/create-book",status_code=status.HTTP_201_CREATED)
 async def create_book(book_request:BookRequest):
     print(type(book_request)) 
     new_book= (Book(**book_request.model_dump()))
@@ -130,7 +131,7 @@ async def read_one_book(book_id:int=Path(gt=0)):
 
 
 
-@app.put("/books/update_book")
+@app.put("/books/update_book",status_code=status.HTTP_204_NO_CONTENT)
 async def update_book(book:BookRequest):
     book_change=False
     for i in range(len(BOOKS)):
