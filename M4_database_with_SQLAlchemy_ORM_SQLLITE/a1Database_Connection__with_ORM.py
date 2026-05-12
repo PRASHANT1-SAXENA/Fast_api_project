@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 
 
 # for SQLITE:- sqlite:///./todos.db
-SQLALCHEMY_DATABASE_URL = 'sqlite:///./todos.db'
+SQLALCHEMY_DATABASE_URL = 'sqlite:///./todosapp.db'  # for development only as it is file base local db not like mysql or postgress which server based
 
 
 # for PostgreSQL:-
@@ -25,7 +25,7 @@ engine = create_engine(SQLALCHEMY_DATABASE_URL,connect_args={'check_same_thread'
 
 
 
-SessionLocal= sessionmaker(autcomit=False, autoflush=False,bind= engine)
+SessionLocal = sessionmaker(autocommit=False,autoflush=False,bind=engine)
 
 """In SQLAlchemy, autoflush automatically sends pending session changes
    to the database before running a query, without permanently saving them.

@@ -12,16 +12,15 @@ from a1Database_Connection__with_ORM import engine ,SessionLocal
 app = FastAPI()
 
 models.Base.metadata.create_all(bind=engine) 
-"""this command models.Base.metadata.create_all(bind=engine) it will create your todos.db file
- here
+"""this command models.Base.metadata.create_all(bind=engine) it will create your todosapp.db file
+here
 if you change something in  model in database2_table_models.py you need to delete it and run it 
 again later you will learn how to handle this situatin without deleting this file
 """
 
-
 """
-after creating todos.db file here install sqllite  on computer by just downloading and in c drive an set evinoment path of 
-you system then on cmd sqlite3 todos.db after making the todos.db file this cmd will mimic you table 
+to read this todosapp.db file here install sqllite then on cmd sqlite3 todos.db after making the
+todos.db file this cmd will mimic you table 
 in your database which you installed.
 """
 
@@ -81,20 +80,15 @@ async def check():
     return "all good upto here with code till not fetching data "
 
 
-""" Bellow api  will work when you have install sqllite properly in system and have that todos table 
-which is send by todos.db with this command on cmd sqlite3 todos.db and you must have this todos.db file 
-for this cmd just check on cmd when sqlite is running then give this cmd only .schema
-"""
 
 
-# @app.get("/show_data")
-# async def read_all(db: Annotated[Session, Depends(get_db)]):
-#     try:
-#         return db.query(Todos).all()
-#     except Exception:
-#         raise HTTPException(status_code=500, detail="Not able to connect database")
+@app.get("/show_data")
+async def read_all(db: Annotated[Session, Depends(get_db)]):
+    try:
+        return db.query(Todos).all()
+    except Exception:
+        raise HTTPException(status_code=500, detail="Not able to connect database")
     
-
 
 db_dependency=Annotated[Session,Depends(get_db)]
 

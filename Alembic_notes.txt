@@ -1,0 +1,47 @@
+first pip install alembic
+
+> then use init command 
+
+> then you will get two thing one is name of forlder which you give while init command let say here
+ it as alemnic_dir and second is alembic.ini 
+
+> then in alembic.ini just change the sqlalchemy.url with your app database url and in alembic_dir
+there is env.py file there import your app's model file  like this import a2Database_tables_Models
+
+> then remove the this line # if config.config_file_name is not None: and unindended the below
+line from env.py file 
+
+> then change target_metadata = None to target_metadata = a2Database_tables_Models.Base.metadata
+
+
+then use your command which is require here we have run here
+alembic revision -m "Create phone number for user column"
+then update the file as per requirement like upgrade function like
+def upgrade() -> None:
+    op.add_column("Users",sa.Column('phone_number',sa.String(),nullable=True))
+
+then run command i.e alembic upgrade <that Revision ID which you want to upgrade in the file create_phone..>
+
+now you can add phone_number column in model file which is previouly giving error of internal server error when calling after adding new column without alembic process 
+
+similary for downgrade 
+    def downgrade() -> None:
+    op.drop_column('Users','phone_number')
+
+then run cmd alembic downgrade -1
+
+
+Note:- for post api after adding a new column just edit post request basemodel add those new column in request as well
+
+
+
+
+
+
+
+
+cmds
+alembic init <forlder name>      initialize a new generic environment it should be in the project directory
+alembic revision -m <message>    creates a new revision of the environment
+alembic upgrade <revision #>    Run our upgrade migration to our database
+alemnic downgrade -1            Run our downgrade migration to our database

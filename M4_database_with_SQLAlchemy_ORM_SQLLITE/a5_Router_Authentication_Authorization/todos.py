@@ -6,8 +6,8 @@ from starlette import status
 import a2Database_tables_Models as models
 from a2Database_tables_Models import Todos
 from a1Database_Connection__with_ORM import SessionLocal
+from .auth import get_current_user
 
-# we will not pass the id as it is the primary key and it waill handle by sqlachemy as it made there itself, after increment.
 
 
 
@@ -21,6 +21,15 @@ def get_db():
     finally:
         db.close()
 
+
+db_dependency=Annotated[Session,Depends(get_db)]
+user_dependency=Annotated[dict,Depends(get_current_user)]
+
+
+
+
+
+# we will not pass the id as it is the primary key and it waill handle by sqlachemy as it made there itself, after increment.
 class TodoRequest(BaseModel):
     title:str = Field(min_length=3)
     description:str =Field(min_length=3,max_length=100)
@@ -36,16 +45,13 @@ async def check():
 
 
 
-# @router.get("/show_data")
-# async def read_all(db: Annotated[Session, Depends(get_db)]):
-#     try:
-#         return db.query(Todos).all()
-#     except Exception:
-#         raise HTTPException(status_code=500, detail="Not able to connect database")
+@router.get("/show_data")
+async def read_all(db: Annotated[Session, Depends(get_db)]):
+    try:
+        return db.query(Todos).all()
+    except Exception:
+        raise HTTPException(status_code=500, detail="Not able to connect database")
     
-
-
-db_dependency=Annotated[Session,Depends(get_db)]
 
 
 
@@ -57,14 +63,20 @@ async def read_todo(db:db_dependency,todo_id:int=Path(gt=0)):
     raise HTTPException(status_code=404,detail="Todo not found")
 
 
-
-
-@router.post("/todo",status_code=status.HTTP_201_CREATED)
+@router.post("/todo",status_code=status.HTTP_201_CREATED)  # 
 async def create_todo(db:db_dependency,todo_request:TodoRequest):
-    todo_model=Todos(**todo_request.model_dump())
-
+    todo_model=Todos(**todo_request.model_dump())   
     db.add(todo_model)
-    db.commit()
+    db.commit() 
+
+# same as above but add user_auth_as well
+@router.post("/todo_with_login",status_code=status.HTTP_201_CREATED)  # 
+async def create_todo_required_login_example(db:db_dependency,user:user_dependency,todo_request:TodoRequest):
+    if user is None:
+        raise HTTPException(status_code=401,detail="Authenticated Failed")
+    todo_model=Todos(**todo_request.model_dump(),owner_id=user.get('id'))    #we need to give explictily owner_id as it is not in TodoRequest so it was going null previously when we are not providing id but now we are taking it from auth table now
+    db.add(todo_model)
+    db.commit()        
 
 
 
