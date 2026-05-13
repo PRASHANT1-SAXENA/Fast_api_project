@@ -11,7 +11,10 @@ from .auth import get_current_user
 
 
 
-router=APIRouter()
+router=APIRouter(
+    # prefix='/auth',   
+    tags=['todos']
+)
 
 def get_db():
     db=SessionLocal()
